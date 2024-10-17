@@ -17,25 +17,31 @@ public class CustomerDiscountGenerator {// The name of the Program
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /*The line below declares a String variable named myFile and assigns it the name 
-        of the file to be read, customers.txt. This file should be in the same directory as the program or provide a full path.*/
-        String myFile = "C:\\Users\\reg05\\CCT\\customers.txt";
+        String customerFile = "C:\\Users\\reg05\\CCT\\customers.txt"; /*This is the location of the file that needs to be read. Ensure that the file patch is correct
+        before running the program*/
         
-        //Creates a new class DataValidator to validate the data in the txt file
-        DataValidator validator = new DataValidator();
-        
-        try (BufferedReader br = new BufferedReader(new FileReader(myFile))){
-            String line;//This line declares a String variable named line, which holds each line of text read from the txt file.
-            while ((line = br.readLine()) != null) {//The while loop here reads each line until it reaches the end of the file and causes it to exit.
-                //validation proces needs to be done here
-                System.out.println(line);
-                
+        try (BufferedReader br = new BufferedReader(new FileReader(customerFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String fullName = line.trim(); // Conatines the first name and the second name
+                String purchaseValueLine = br.readLine(); //Containes Total Purchase Value
+                String customerClassLine = br.readLine(); //Contains the Class
+                String lastPurchaseYearLine = br.readLine(); //Containes Last Purchase Year
+
+                // Check if we got all required lines
+                if (purchaseValueLine == null || customerClassLine == null || lastPurchaseYearLine == null) {
+                    System.out.println("Incomplete Data, cannot be processed.");
+                    continue;
+                }
+
+                // Print the data (or process it further as needed)
+                System.out.println(fullName);
+                System.out.println(purchaseValueLine.trim());
+                System.out.println(customerClassLine.trim());
+                System.out.println(lastPurchaseYearLine.trim());
             }
-        } catch (IOException e){//This line starts the catch block to handle any IOException that might occur during the operation.
-                e.printStackTrace();{
-            System.out.println("Error Data Not Valid");
-        }
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
         }
     }
-    
 }

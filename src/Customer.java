@@ -8,7 +8,7 @@
  * @author reg05
  */
 public class Customer {
-    private String firstName;
+    private String firstName;//final is used to declare the variable constant
     private String secondName;
     private double purchaseValue;
     private int customerClass;
@@ -22,7 +22,52 @@ public class Customer {
         this.lastPurchaseYear = lastPurchaseYear;
         
     } 
-        //Validation methods as follows
+    // Setter methods
+    /*Each field now has a corresponding setter method (setFirstName(), setSecondName(), etc.) to update its value.
+    */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public void setPurchaseValue(double purchaseValue) {
+        this.purchaseValue = purchaseValue;
+    }
+
+    public void setCustomerClass(int customerClass) {
+        this.customerClass = customerClass;
+    }
+
+    public void setLastPurchaseYear(String lastPurchaseYear) {
+        this.lastPurchaseYear = lastPurchaseYear;
+    }
+    
+        
+    // The getter methods allow access to the current values of the fields.
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    public String getSecondName(){
+        return secondName;
+    }
+    
+    public double getPurchaseValue(){
+        return purchaseValue;
+    }
+    
+    public int getCustomerClass(){
+        return customerClass;
+    }
+    
+    public String getLastPurchaseYear(){
+        return lastPurchaseYear;
+    }
+        
+//Validation methods as follows
     public boolean validateFirstName(){
         return firstName.matches("[a-zA-Z]+");
     }
@@ -46,7 +91,19 @@ public class Customer {
         return lastPurchaseYear.matches("\\d{4}");
     }
     
-    public boolean validCustomerData(){
+    public boolean validateCustomerData(){
         return validateFullName() && validatePurchaseValue() && validateClass() && validateLastPurchaseYear();
     }
+    
+   @Override
+    public String toString() {
+        return "Customer{" +
+                "firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", purchaseValue=" + purchaseValue +
+                ", customerClass=" + customerClass +
+                ", lastPurchaseYear='" + lastPurchaseYear + '\'' +
+                '}';
+    }
+    
 }
