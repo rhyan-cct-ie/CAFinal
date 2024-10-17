@@ -22,9 +22,12 @@ public class CAFinal {//
         of the file to be read, customers.txt. This file should be in the same directory as the program or provide a full path.*/
         String myFile = "C:\\Users\\reg05\\CCT\\customers.txt";
         
+        //Creates a new class DataValidator to validate the data in the txt file
+        DataValidator validator = new DataValidator();
+        
         try (BufferedReader br = new BufferedReader(new FileReader(myFile))){
             String line;//This line declares a String variable named line, which holds each line of text read from the txt file.
-            while ((line = br.readLine()) != null) {//The while loop here reads each line until it reaches the end of the file and causes it to exit
+            while ((line = br.readLine()) != null) {//The while loop here reads each line until it reaches the end of the file and causes it to exit.
                 //validation proces needs to be done here
                 System.out.println(line);
                 
