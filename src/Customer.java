@@ -7,6 +7,8 @@
  *
  * @author reg05
  */
+import java.util.Calendar;
+
 public class Customer {
     private String firstName;//final is used to declare the variable constant
     private String secondName;
