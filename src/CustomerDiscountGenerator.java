@@ -39,6 +39,13 @@ public class CustomerDiscountGenerator {// The name of the Program
                     System.out.println("Invalid Full Name: cannot be empty.");
                     continue;//The program will skip this customer
                 }
+                
+                String[] nameParts = fullName.split(" ");
+                if (nameParts.length < 2){
+                    System.out.println("Invalid Full Name for customer: must contain at least a first and a second name");
+                    continue;//The program will skip this customer
+                }
+                
 
                 // Print the data (or process it further as needed)
                 System.out.println(fullName);

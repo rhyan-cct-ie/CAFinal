@@ -15,6 +15,7 @@ public class Customer {
     private String lastPurchaseYear;
     
     public Customer (String firstName, String secondName, double purchaseValue, int customerClass, String lastPurchaseYear){
+        
         this.firstName = firstName;
         this.secondName = secondName;
         this.purchaseValue = purchaseValue;
@@ -26,22 +27,42 @@ public class Customer {
     /*Each field now has a corresponding setter method (setFirstName(), setSecondName(), etc.) to update its value.
     */
     public void setFirstName(String firstName) {
+        if (!firstName.matches("[a-zA-Z]+")) {
+            throw new IllegalArgumentException("Invalid first name: " + firstName);
+        }
         this.firstName = firstName;
     }
 
     public void setSecondName(String secondName) {
+        if (!secondName.matches("[a-zA-Z0-9]+")) {
+            throw new IllegalArgumentException("Invalid second name: " + secondName);
+        }
         this.secondName = secondName;
     }
 
     public void setPurchaseValue(double purchaseValue) {
+        if (purchaseValue < 0) {
+            throw new IllegalArgumentException("Invalid purchase value: " + purchaseValue);
+        }
         this.purchaseValue = purchaseValue;
     }
 
     public void setCustomerClass(int customerClass) {
+        if (customerClass < 1 || customerClass > 3) {
+            throw new IllegalArgumentException("Invalid customer class: " + customerClass);
+        }
         this.customerClass = customerClass;
     }
 
     public void setLastPurchaseYear(String lastPurchaseYear) {
+        if (!lastPurchaseYear.matches("\\d{4}")) {
+            throw new IllegalArgumentException("Invalid last purchase year format: " + lastPurchaseYear);
+        }
+        int year = Integer.parseInt(lastPurchaseYear);
+        int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        if (year < 1900 || year > currentYear) {
+            throw new IllegalArgumentException("Invalid last purchase year: " + lastPurchaseYear);
+        }
         this.lastPurchaseYear = lastPurchaseYear;
     }
     
@@ -84,7 +105,7 @@ public class Customer {
         return purchaseValue >= 0;
     }
     public boolean validateClass(){
-        return customerClass <=1 && customerClass >=3;
+        return customerClass >=1 && customerClass <=3;
     }
     
     public boolean validateLastPurchaseYear(){
@@ -95,15 +116,11 @@ public class Customer {
         return validateFullName() && validatePurchaseValue() && validateClass() && validateLastPurchaseYear();
     }
     
-   @Override
+    @Override
     public String toString() {
-        return "Customer{" +
-                "firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", purchaseValue=" + purchaseValue +
-                ", customerClass=" + customerClass +
-                ", lastPurchaseYear='" + lastPurchaseYear + '\'' +
-                '}';
+        return "Customer[firstName='" + firstName + "', secondName='" + secondName + 
+               "', purchaseValue=" + purchaseValue + ", customerClass=" + customerClass + 
+               ", lastPurchaseYear='" + lastPurchaseYear + "']";
     }
     
 }
