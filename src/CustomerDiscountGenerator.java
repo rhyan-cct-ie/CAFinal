@@ -33,6 +33,12 @@ public class CustomerDiscountGenerator {// The name of the Program
                     System.out.println("Incomplete Data, cannot be processed.");
                     continue;
                 }
+                
+                //Validate first line (Full Name)
+                if(fullName.isEmpty()){
+                    System.out.println("Invalid Full Name: cannot be empty.");
+                    continue;//The program will skip this customer
+                }
 
                 // Print the data (or process it further as needed)
                 System.out.println(fullName);
