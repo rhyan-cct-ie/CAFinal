@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package cafinal;//what to name the package??????
-
 /**
  *
  * @author reg05

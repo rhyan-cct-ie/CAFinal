@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package cafinal;
 
 /**
  *
@@ -12,7 +11,7 @@ import java.io.BufferedReader;//Imports a BufferedReader class to read the file 
 import java.io.FileReader;//handle the basic charecter-reading on my txt file
 import java.io.IOException;//This is to help error-handling in the program as many issues can arise from reading and writing to a file
 
-public class CAFinal {//
+public class CustomerDiscountGenerator {// The name of the Program
 
     /**
      * @param args the command line arguments
@@ -33,7 +32,9 @@ public class CAFinal {//
                 
             }
         } catch (IOException e){//This line starts the catch block to handle any IOException that might occur during the operation.
-                e.printStackTrace();
+                e.printStackTrace();{
+            System.out.println("Error Data Not Valid");
+        }
         }
     }
     
