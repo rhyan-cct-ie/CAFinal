@@ -59,7 +59,7 @@ public class CustomerDiscountGenerator {// The name of the Program
         // Display all valid customers
         System.out.println("\nList of valid customers:");
         for (Customer customer : customers) {
-            System.out.println(customer);
+            System.out.println("Purchase Value: " + customer.getPurchaseValue());
         }
     }
 }
