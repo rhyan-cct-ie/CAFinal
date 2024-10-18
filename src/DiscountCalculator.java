@@ -51,8 +51,8 @@ public class DiscountCalculator {
         }
 
         double discountAmount = purchaseValue * discountPercentage;// Calculates the discount amount
-        double discountedValue = purchaseValue - discountAmount;// Calculates the final discounted value or the FINAL VALUE
+        double finalValue = purchaseValue - discountAmount;// Calculates the final discounted value or the FINAL VALUE
 
-        return discountedValue;//The FINAL VALUE after applying the calculated discount.
+        return finalValue;//The FINAL VALUE after applying the calculated discount.
     }
 }

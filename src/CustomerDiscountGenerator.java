@@ -66,16 +66,16 @@ public class CustomerDiscountGenerator {// The name of the Program
                 
                 //Calculate the FINAL VALUE using the Discount Calculator
                 DiscountCalculator calculator = new DiscountCalculator(customer);
-                double discountedValue = calculator.calculateDiscountedValue();
+                double finalValue = calculator.calculateDiscountedValue();
                 
                 bw.write(customer.getFirstName() + " " + customer.getSecondName());
                 bw.newLine(); // Move to the next line
                 bw.write(String.valueOf(customer.getPurchaseValue())); // Writes the purchase value
                 bw.newLine(); // Move to the next line
-                bw.write(String.valueOf(discountedValue));//BufferedWriter only writes in text therefore a double needs to be converted into a string
+                bw.write(String.valueOf(finalValue));//BufferedWriter only writes in text therefore a double needs to be converted into a string
                 bw.newLine();//Space to separate each customer's data
             }
-            System.out.println("Customer Final Discounted Value written to " + outputCustomerFile);
+            System.out.println("Customer Discounted Value written to " + outputCustomerFile);
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }
