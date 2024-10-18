@@ -36,12 +36,6 @@ public class CustomerDiscountGenerator {// The name of the Program
 
                     line = br.readLine(); // Read the customer class
                     int customerClass = Integer.parseInt(line.trim());
-                    
-                    /*Validates customer class. The code checks if customerClass is between 1 and 3 before creating the Customer object.
-                    If the value is outside this range, an IllegalArgumentException is thrown, and the error is caught and logged*/
-                    if (customerClass < 1 || customerClass > 3) {
-                        throw new IllegalArgumentException("Invalid customer class: " + customerClass);
-                    }
 
                     line = br.readLine(); // Read the last purchase year
                     String lastPurchaseYear = line.trim();
