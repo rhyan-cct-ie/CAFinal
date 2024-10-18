@@ -50,7 +50,9 @@ public class CustomerDiscountGenerator {// The name of the Program
                     customers.add(customer); // Add valid customer to the list
                     System.out.println("Valid customer: " + customer);
 
-                } catch (Exception e) {
+                } catch (IOException | NumberFormatException e) {
+                    /*handle multiple exceptions that can arise from the same block of code, 
+                    leading to cleaner and more readable error handling programs.*/
                     System.out.println("Error: invalid customer data: " + e.getMessage());
                 }
             }
@@ -58,7 +60,7 @@ public class CustomerDiscountGenerator {// The name of the Program
             System.out.println("Error reading file: " + e.getMessage());
         }
 
-        // Write valid customers to the output file
+        // Write valid customers to the output file as customersdiscount.txt
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputCustomerFile))) {
             for (Customer customer : customers) {
                 bw.write(customer.getFirstName() + " " + customer.getSecondName());
