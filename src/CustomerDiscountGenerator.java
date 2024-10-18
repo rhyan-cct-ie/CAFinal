@@ -36,6 +36,12 @@ public class CustomerDiscountGenerator {// The name of the Program
 
                     line = br.readLine(); // Read the customer class
                     int customerClass = Integer.parseInt(line.trim());
+                    
+                    /*Validates customer class. The code checks if customerClass is between 1 and 3 before creating the Customer object.
+                    If the value is outside this range, an IllegalArgumentException is thrown, and the error is caught and logged*/
+                    if (customerClass < 1 || customerClass > 3) {
+                        throw new IllegalArgumentException("Invalid customer class: " + customerClass);
+                    }
 
                     line = br.readLine(); // Read the last purchase year
                     String lastPurchaseYear = line.trim();
@@ -50,10 +56,10 @@ public class CustomerDiscountGenerator {// The name of the Program
                     customers.add(customer); // Add valid customer to the list
                     System.out.println("Valid customer: " + customer);
 
-                } catch (IOException | NumberFormatException e) {
-                    /*handle multiple exceptions that can arise from the same block of code, 
-                    leading to cleaner and more readable error handling programs.*/
-                    System.out.println("Error: invalid customer data: " + e.getMessage());
+                } catch (NumberFormatException e) {
+                    System.out.println("Error: invalid nu,ber format in customer data: " + e.getMessage());
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Error: " + e.getMessage());
                 }
             }
         } catch (IOException e) {
@@ -63,11 +69,19 @@ public class CustomerDiscountGenerator {// The name of the Program
         // Write valid customers to the output file as customersdiscount.txt
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputCustomerFile))) {
             for (Customer customer : customers) {
+                
+                //Calculate the FINAL VALUE using the Discount Calculator
+                DiscountCalculator calculator = new DiscountCalculator(customer);
+                double discountedValue = calculator.calculateDiscountedValue();
+                
                 bw.write(customer.getFirstName() + " " + customer.getSecondName());
                 bw.newLine(); // Move to the next line
-                bw.write(String.valueOf(customer.getPurchaseValue())); // Write the purchase value
+                bw.write(String.valueOf(customer.getPurchaseValue())); // Writes the purchase value
                 bw.newLine(); // Move to the next line
+                bw.write(String.valueOf(discountedValue));//BufferedWriter only writes in text therefore a double needs to be converted into a string
+                bw.newLine();//Space to separate each customer's data
             }
+            System.out.println("Customer Final Discounted Value written to " + outputCustomerFile);
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }

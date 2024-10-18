@@ -29,7 +29,7 @@ public class DiscountCalculator {
 
         if (customerClass == 1) {
             if (lastPurchaseYear == currentYear) {
-                discountPercentage = 0.30;//t if last purchase is in the current year (2024)
+                discountPercentage = 0.30;//30% discount if last purchase is in the current year (2024)
             } else if (lastPurchaseYear < currentYear) {
                 discountPercentage = 0.20;// 20% discount if last purchase is before the current year
             } else if (lastPurchaseYear <= currentYear - 5) {
@@ -53,6 +53,6 @@ public class DiscountCalculator {
         double discountAmount = purchaseValue * discountPercentage;// Calculates the discount amount
         double discountedValue = purchaseValue - discountAmount;// Calculates the final discounted value or the FINAL VALUE
 
-        return discountedValue;//FINAL VALUE
+        return discountedValue;//The FINAL VALUE after applying the calculated discount.
     }
 }
