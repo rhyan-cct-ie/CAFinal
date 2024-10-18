@@ -18,16 +18,14 @@ public class Customer {
     
     public Customer (String firstName, String secondName, double purchaseValue, int customerClass, String lastPurchaseYear){
         
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.purchaseValue = purchaseValue;
-        this.customerClass = customerClass;
-        this.lastPurchaseYear = lastPurchaseYear;
-        
-    } 
-    // Setter methods
-    /*Each field now has a corresponding setter method (setFirstName(), setSecondName(), etc.) to update its value.
-    */
+        // Constructor that uses setters for validation
+        setFirstName(firstName); // Use setter for validation
+        setSecondName(secondName); // Use setter for validation
+        setPurchaseValue(purchaseValue); // Use setter for validation
+        setCustomerClass(customerClass); // Use setter for validation
+        setLastPurchaseYear(lastPurchaseYear); // Use setter for validation
+}
+    //validating the data
     public void setFirstName(String firstName) {
         if (!firstName.matches("[a-zA-Z]+")) {
             throw new IllegalArgumentException("Invalid first name: " + firstName);
@@ -89,35 +87,7 @@ public class Customer {
     public String getLastPurchaseYear(){
         return lastPurchaseYear;
     }
-        
-//Validation methods as follows
-    public boolean validateFirstName(){
-        return firstName.matches("[a-zA-Z]+");
-    }
-    
-    public boolean validateSecondName(){
-        return secondName.matches("[a-zA-Z0-9]+");
-    }
-    
-    public boolean validateFullName(){
-        return validateFirstName() && validateSecondName();
-    }
-    
-    public boolean validatePurchaseValue(){
-        return purchaseValue >= 0;
-    }
-    public boolean validateClass(){
-        return customerClass >=1 && customerClass <=3;
-    }
-    
-    public boolean validateLastPurchaseYear(){
-        return lastPurchaseYear.matches("\\d{4}");
-    }
-    
-    public boolean validateCustomerData(){
-        return validateFullName() && validatePurchaseValue() && validateClass() && validateLastPurchaseYear();
-    }
-    
+
     @Override
     public String toString() {
         return "Customer[firstName='" + firstName + "', secondName='" + secondName + 
