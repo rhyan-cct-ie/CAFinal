@@ -84,8 +84,6 @@ public class CustomerDiscountGenerator {// The name of the Program
                 
                 bw.write(customer.getFirstName() + " " + customer.getSecondName());/*Writes customer's full name to output file.*/
                 bw.newLine(); // Move to the next line
-                bw.write(String.valueOf(customer.getPurchaseValue())); // Writes the purchase value
-                bw.newLine(); // Move to the next line
                 bw.write(String.valueOf(finalValue));//BufferedWriter only writes in text therefore a double needs to be converted into a string
                 bw.newLine();//Space to separate each customer's data.
             }
