@@ -23,60 +23,75 @@ public class CustomerDiscountGenerator {// The name of the Program
         ArrayList<Customer> customers = new ArrayList<>();
         String customerFile = "C:\\Users\\reg05\\CCT\\customers.txt"; /*This is the location of the file that needs to be read. Ensure that the file patch is correct
         before running the program*/
+        
         String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount.txt";//this is the path where the output will be written by the program
+        //
         try (BufferedReader br = new BufferedReader(new FileReader(customerFile))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                try {
-                    // Read customer details from four lines
-                    String fullName = line.trim();
+            /*/Opens the customer file for reading using BufferedReader, 
+             which wraps around FileReader for efficient reading. The file is automatically 
+             closed when this block is exited.*/
+            
+            String line;//Variable to hold each line read from txt file
+            while ((line = br.readLine()) != null) {//Loop reads lines from the file until there are no more lines.
+                try {// Nested try block for handling potential exceptions that may occur while processing a customer.
+                   
+                    // Reads customer details from four lines
+                    //.trim() is called to remove any leading or trailing whitespace from the each line
+                    
+                    String fullName = line.trim();// Reads the first line, which is the full name of the customer. 
+                        // trim() is used to remove any leading or trailing whitespace.
+                    line = br.readLine(); // Reads the second line which is the purchase value
+                    double purchaseValue = Double.parseDouble(line.trim());//parses this line as a double
 
-                    line = br.readLine(); // Read the purchase value
-                    double purchaseValue = Double.parseDouble(line.trim());
+                    line = br.readLine(); // Reads the customer class
+                    int customerClass = Integer.parseInt(line.trim());//parses this line as an integer
 
-                    line = br.readLine(); // Read the customer class
-                    int customerClass = Integer.parseInt(line.trim());
 
-                    line = br.readLine(); // Read the last purchase year
-                    String lastPurchaseYear = line.trim();
+                    line = br.readLine(); // Reads the last purchase year
+                    String lastPurchaseYear = line.trim();//lastPurchaseYear is stored as a string;
 
-                    // Split full name into firstName and secondName
-                    String[] nameParts = fullName.split(" ", 2);
-                    String firstName = nameParts[0];
+                    // Splits full name into two parts: firstName and secondName.
+                    String[] nameParts = fullName.split(" ", 2);// Split is done at the first space character.
+                    String firstName = nameParts[0];//Assigns the first part to firstname
                     String secondName = nameParts.length > 1 ? nameParts[1] : "";
+                    //If there is a second part, assign it to secondName. 
+                    //Otherwise, set it to an empty string.
 
-                    // Create a new Customer object using the data
+                    // Creates a new Customer object using the data
                     Customer customer = new Customer(firstName, secondName, purchaseValue, customerClass, lastPurchaseYear);
                     customers.add(customer); // Add valid customer to the list
                     System.out.println("Valid customer: " + customer);
 
-                } catch (NumberFormatException e) {
-                    System.out.println("Error: invalid nu,ber format in customer data: " + e.getMessage());
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Error: " + e.getMessage());
+                } catch (NumberFormatException e) {//Catch block to handle errors if the purchase value or customer class cannot be parsed.
+                    System.out.println("Error: invalid number format in customer data: " + e.getMessage());
+                } catch (IllegalArgumentException e) {// Catch block for any IllegalArgumentException, such as validation failures.
+                    System.out.println("Error: invalid customer data " + e.getMessage());
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException e) {//Catch block for handling errors while reading the file,such as file not found or read errors.
             System.out.println("Error reading file: " + e.getMessage());
         }
 
         // Write valid customers to the output file as customersdiscount.txt
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputCustomerFile))) {
-            for (Customer customer : customers) {
+            //Opens the output file for writing. The Buffered writer warps around FileWriter for efficient writing and the file is
+            //automaticall closed.
+            for (Customer customer : customers) { //For loop is used for simplicity and readability. This iterates through the list of valid customers.
                 
                 //Calculate the FINAL VALUE using the Discount Calculator
                 DiscountCalculator calculator = new DiscountCalculator(customer);
                 double finalValue = calculator.calculateDiscountedValue();
                 
-                bw.write(customer.getFirstName() + " " + customer.getSecondName());
+                bw.write(customer.getFirstName() + " " + customer.getSecondName());/*Writes customer's full name to output file.*/
                 bw.newLine(); // Move to the next line
                 bw.write(String.valueOf(customer.getPurchaseValue())); // Writes the purchase value
                 bw.newLine(); // Move to the next line
                 bw.write(String.valueOf(finalValue));//BufferedWriter only writes in text therefore a double needs to be converted into a string
-                bw.newLine();
+                bw.newLine();//Space to separate each customer's data.
             }
             System.out.println("Customer Discounted Value written to " + outputCustomerFile);
-        } catch (IOException e) {
+            //Confirmtaion message indicating that the output file was successful.
+        } catch (IOException e) {//Catch block for handling errors for writing a file, such as file permission issues.
             System.out.println("Error writing to file: " + e.getMessage());
         }
     }
