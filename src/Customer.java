@@ -9,7 +9,7 @@
  */
 import java.util.Calendar;
 
-public class Customer {
+public final class Customer {
     private String firstName;//final is used to declare the variable constant
     private String secondName;
     private double purchaseValue;
@@ -26,7 +26,7 @@ public class Customer {
         setLastPurchaseYear(lastPurchaseYear); // Use setter for validation
 }
     //validating the data
-    public void setFirstName(String firstName) {
+    private void setFirstName(String firstName) {
         if (!firstName.matches("[a-zA-Z]+")) {
             throw new IllegalArgumentException("Invalid first name: " + firstName);
         }
