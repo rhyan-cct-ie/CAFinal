@@ -21,10 +21,9 @@ public class CustomerDiscountGenerator {// The name of the Program
      */
     public static void main(String[] args) {
         ArrayList<Customer> customers = new ArrayList<>();
-        String customerFile = "C:\\Users\\reg05\\CCT\\customers.txt"; /*This is the location of the file that needs to be read. Ensure that the file patch is correct
-        before running the program*/
+        String customerFile = "C:\\Users\\reg05\\CCT\\customers.txt";//The file path where the program reads from.
         
-        String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount.txt";//This is the path where the output will be written by the program
+        String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount.txt";//The file path where the programs writ to.
         
         try (BufferedReader br = new BufferedReader(new FileReader(customerFile))) {
             /*/Opens the customer file for reading using BufferedReader, 
@@ -35,19 +34,19 @@ public class CustomerDiscountGenerator {// The name of the Program
             while ((line = br.readLine()) != null) {//Loop reads lines from the file until there are no more lines.
                 try {// Nested try block for handling potential exceptions that may occur while processing a customer.
                    
-                    // Reads customer details from four lines
+                    // Read customer details from four lines
                     //.trim() is called to remove any leading or trailing whitespace from the each line
                     
-                    String fullName = line.trim();// Reads the first line, which is the full name of the customer. 
-                        // trim() is used to remove any leading or trailing whitespace.
-                    line = br.readLine(); // Reads the second line which is the purchase value
+                    String fullName = line.trim();// Read the first line, which is the full name of the customer. 
+                    
+                    line = br.readLine(); // Read the second line which is the purchase value
                     double purchaseValue = Double.parseDouble(line.trim());//parses this line as a double
+                    
+                    line = br.readLine(); // Read the third line which is the customer class
+                    int customerClass = Integer.parseInt(line.trim());//parse this line as an integer
 
-                    line = br.readLine(); // Reads the customer class
-                    int customerClass = Integer.parseInt(line.trim());//parses this line as an integer
 
-
-                    line = br.readLine(); // Reads the last purchase year
+                    line = br.readLine(); // Read the 4th line which is the last purchase year
                     String lastPurchaseYear = line.trim();//lastPurchaseYear is stored as a string;
 
                     // Splits full name into two parts: firstName and secondName.

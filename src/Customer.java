@@ -9,8 +9,8 @@
  */
 import java.util.Calendar;
 
-public final class Customer {
-    private String firstName;//final is used to declare the variable constant
+public class Customer {
+    private String firstName;
     private String secondName;
     private double purchaseValue;
     private int customerClass;
