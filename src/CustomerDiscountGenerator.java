@@ -21,7 +21,7 @@ public class CustomerDiscountGenerator {// The name of the Program
      */
     public static void main(String[] args) {
         ArrayList<Customer> customers = new ArrayList<>();
-        String customerFile = "C:\\Users\\reg05\\CCT\\customers.txt";//The file path where the program reads from.
+        String customerFile = "C:\\Users\\reg05\\Downloads\\TESTcustomerfile.txt";//The file path where the program reads from.
         
         String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount.txt";//The file path where the programs writ to.
         
@@ -32,33 +32,45 @@ public class CustomerDiscountGenerator {// The name of the Program
             
             String line;//Variable to hold each line read from txt file
             while ((line = br.readLine()) != null) {//While loop reads lines from the file until there are no more lines.
+                line = line.trim();//trim white space
+                if(line.isEmpty()){
+                    continue;//Skip empty lines
+                }
                 try {// Nested try block for handling potential exceptions that may occur while processing a customer.
                    
                     // Read customer details from four lines
                     //.trim() is called to remove any leading or trailing whitespace from the each line
                     
-                    String fullName = line.trim();// Read the first line, which is the full name of the customer. 
+                    String fullName = line.trim();// Read the first line, which is the full name of the customer.
                     System.out.println(fullName);
                     
                     line = br.readLine(); // Read the second line which is the purchase value
-                    double purchaseValue = Double.parseDouble(line.trim());//parses this line as a double
+                    while (line !=null && line.trim().isEmpty()){
+                        line = br.readLine();
+                    }
+                    double purchaseValue = Double.parseDouble(line.trim());//parses this line as a double       
                     System.out.println(purchaseValue);
                     
                     line = br.readLine(); // Read the third line which is the customer class
+                    while (line != null && line.trim().isEmpty()){
+                        line = br.readLine(); //skip empty line
+                    }
                     int customerClass = Integer.parseInt(line.trim());//parse this line as an integer
                     System.out.println(customerClass);
 
 
                     line = br.readLine(); // Read the 4th line which is the last purchase year
+                    while (line != null && line.trim().isEmpty()){
+                        line = br.readLine();
+                    }
                     String lastPurchaseYear = line.trim();//lastPurchaseYear is stored as a string;
                     System.out.println(lastPurchaseYear);
 
                     // Splits full name into two parts: firstName and secondName.
                     String[] nameParts = fullName.split(" ", 2);// Split is done at the first space character.
                     String firstName = nameParts[0];//Assigns the first part to firstname
-                    String secondName = nameParts.length > 1 ? nameParts[1] : "";
-                    //If there is a second part, assign it to secondName. 
-                    //Otherwise, set it to an empty string.
+                    String secondName = nameParts.length > 1 ? nameParts[1] : "";////If there is a second part, assign it to secondName. 
+                                                                                //Otherwise, set it to an empty string.
 
                     // Creates a new Customer object using the data
                     Customer customer = new Customer(firstName, secondName, purchaseValue, customerClass, lastPurchaseYear);
@@ -69,6 +81,8 @@ public class CustomerDiscountGenerator {// The name of the Program
                     System.out.println("Error: invalid number format in customer data: " + e.getMessage());
                 } catch (IllegalArgumentException e) {// Catch block for any IllegalArgumentException, such as validation failures.
                     System.out.println("Error: invalid customer data " + e.getMessage());
+                }catch (IOException e) {//Catch block that handles errors that are not caught by specific catch block
+                    System.out.println("Unexpected error: " + e.getMessage());
                 }
             }
         } catch (IOException e) {//Catch block for handling errors while reading the file,such as file not found or read errors.
