@@ -10,6 +10,7 @@
 import java.util.Calendar;
 
 public class Customer {
+    //Declare class fields as private to enforce encapsulation.
     private String firstName;
     private String secondName;
     private double purchaseValue;
@@ -19,11 +20,11 @@ public class Customer {
     public Customer (String firstName, String secondName, double purchaseValue, int customerClass, String lastPurchaseYear){
         
         // Constructor that uses setters for validation
-        setFirstName(firstName); // Use setter for validation
-        setSecondName(secondName); // Use setter for validation
-        setPurchaseValue(purchaseValue); // Use setter for validation
-        setCustomerClass(customerClass); // Use setter for validation
-        setLastPurchaseYear(lastPurchaseYear); // Use setter for validation
+        setFirstName(firstName);
+        setSecondName(secondName);
+        setPurchaseValue(purchaseValue);
+        setCustomerClass(customerClass);
+        setLastPurchaseYear(lastPurchaseYear);
 }
     //validating the data
     private void setFirstName(String firstName) {
@@ -33,28 +34,29 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    public void setSecondName(String secondName) {
+    private void setSecondName(String secondName) {
         if (!secondName.matches("[a-zA-Z0-9]+")) {
             throw new IllegalArgumentException("Invalid second name: " + secondName);
         }
         this.secondName = secondName;
     }
 
-    public void setPurchaseValue(double purchaseValue) {
+    private void setPurchaseValue(double purchaseValue) {
         if (purchaseValue < 0) {
             throw new IllegalArgumentException("Invalid purchase value: " + purchaseValue);
         }
         this.purchaseValue = purchaseValue;
     }
+    
 
-    public void setCustomerClass(int customerClass) {
+    private void setCustomerClass(int customerClass) {
         if (customerClass < 1 || customerClass > 3) {
             throw new IllegalArgumentException("Invalid customer class: " + customerClass);
         }
         this.customerClass = customerClass;
     }
 
-    public void setLastPurchaseYear(String lastPurchaseYear) {
+    private void setLastPurchaseYear(String lastPurchaseYear) {
         if (!lastPurchaseYear.matches("\\d{4}")) {
             throw new IllegalArgumentException("Invalid last purchase year format: " + lastPurchaseYear);
         }
