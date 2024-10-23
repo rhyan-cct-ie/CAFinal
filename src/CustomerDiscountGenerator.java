@@ -38,16 +38,20 @@ public class CustomerDiscountGenerator {// The name of the Program
                     //.trim() is called to remove any leading or trailing whitespace from the each line
                     
                     String fullName = line.trim();// Read the first line, which is the full name of the customer. 
+                    System.out.println(fullName);
                     
                     line = br.readLine(); // Read the second line which is the purchase value
                     double purchaseValue = Double.parseDouble(line.trim());//parses this line as a double
+                    System.out.println(purchaseValue);
                     
                     line = br.readLine(); // Read the third line which is the customer class
                     int customerClass = Integer.parseInt(line.trim());//parse this line as an integer
+                    System.out.println(customerClass);
 
 
                     line = br.readLine(); // Read the 4th line which is the last purchase year
                     String lastPurchaseYear = line.trim();//lastPurchaseYear is stored as a string;
+                    System.out.println(lastPurchaseYear);
 
                     // Splits full name into two parts: firstName and secondName.
                     String[] nameParts = fullName.split(" ", 2);// Split is done at the first space character.
