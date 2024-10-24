@@ -12,6 +12,7 @@ import java.io.FileReader;//handle the basic charecter-reading on my txt file
 import java.io.IOException;//This is to help error-handling in the program as many issues can arise from reading and writing to a file
 import java.util.ArrayList;//This allows to dynamically store and manage a list of objects
 import java.io.BufferedWriter;// Imports BufferedWrited for writing text to a character-output stream more efficiently; improves performance.
+import java.io.File;//Used in File validation 
 import java.io.FileWriter;//FileWriter is used to write character data to a file; opens the file for writing.
 
 public class CustomerDiscountGenerator {// The name of the Program
@@ -45,14 +46,14 @@ public class CustomerDiscountGenerator {// The name of the Program
                     System.out.println(fullName);
                     
                     line = br.readLine(); // Read the second line which is the purchase value
-                    while (line !=null && line.trim().isEmpty()){
+                    while (line !=null && line.trim().isEmpty()){//skip the empty lines
                         line = br.readLine();
                     }
                     double purchaseValue = Double.parseDouble(line.trim());//parses this line as a double       
                     System.out.println(purchaseValue);
                     
                     line = br.readLine(); // Read the third line which is the customer class
-                    while (line != null && line.trim().isEmpty()){
+                    while (line != null && line.trim().isEmpty()){//skip the empty lines
                         line = br.readLine(); //skip empty line
                     }
                     int customerClass = Integer.parseInt(line.trim());//parse this line as an integer
@@ -60,7 +61,7 @@ public class CustomerDiscountGenerator {// The name of the Program
 
 
                     line = br.readLine(); // Read the 4th line which is the last purchase year
-                    while (line != null && line.trim().isEmpty()){
+                    while (line != null && line.trim().isEmpty()){//skip the empty lines
                         line = br.readLine();
                     }
                     String lastPurchaseYear = line.trim();//lastPurchaseYear is stored as a string;
@@ -108,5 +109,19 @@ public class CustomerDiscountGenerator {// The name of the Program
         } catch (IOException e) {//Catch block for handling errors for writing a file, such as file permission issues.
             System.out.println("Error writing to file: " + e.getMessage());
         }
+        
+        // Validate that the file exists, is readable, or not found
+        File outputFile = new File(outputCustomerFile);
+        if (outputFile.exists()) {
+            System.out.println("File exists: " + outputFile.getAbsolutePath());
+            if (outputFile.canRead()) {
+                System.out.println("File is readable.");
+            } else {
+                System.out.println("File is not readable.");
+            }
+        } else {
+            System.out.println("File not found: " + outputFile.getAbsolutePath());
+        }
     }
+    
 }

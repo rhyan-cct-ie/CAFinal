@@ -9,7 +9,7 @@
  */
 import java.util.Calendar;
 public class DiscountCalculator {
-    private Customer customer;// Holds the Customer object for which the discount will be calculated
+    private final Customer customer;// Holds the Customer object for which the discount will be calculated
     
     
     //This is the constructor for the class DiscountCalculator
