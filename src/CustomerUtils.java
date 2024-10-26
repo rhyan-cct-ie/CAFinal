@@ -43,5 +43,10 @@ public class CustomerUtils {
         }
         return customers;//Return the list of cutomers
     }
-    
-}
+        private static double parseNextValue(BufferedReader br) throws IOException {
+        String line;
+        while ((line = br.readLine()) != null && line.trim().isEmpty());
+        if (line == null) throw new IOException("Unexpected end of file");
+        return Double.parseDouble(line.trim());
+    }
+    }
