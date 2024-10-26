@@ -43,10 +43,23 @@ public class CustomerUtils {
         }
         return customers;//Return the list of cutomers
     }
+        //parseNextLine method
         private static double parseNextValue(BufferedReader br) throws IOException {
         String line;
         while ((line = br.readLine()) != null && line.trim().isEmpty());
         if (line == null) throw new IOException("Unexpected end of file");
         return Double.parseDouble(line.trim());
+    }
+        //Validation of customer data
+        private static void validateCustomer(String fullName, double purchaseValue, int customerClass, String lastPurchaseYear) {
+        String[] nameParts = fullName.split(" ", 2);
+        if (!nameParts[0].matches("[a-zA-Z]+")) throw new IllegalArgumentException("Invalid first name: " + nameParts[0]);
+        if (nameParts.length > 1 && !nameParts[1].matches("[a-zA-Z0-9]+")) throw new IllegalArgumentException("Invalid second name: " + nameParts[1]);
+        if (purchaseValue < 0) throw new IllegalArgumentException("Invalid purchase value: " + purchaseValue);
+        if (customerClass < 1 || customerClass > 3) throw new IllegalArgumentException("Invalid customer class: " + customerClass);
+        if (!lastPurchaseYear.matches("\\d{4}")) throw new IllegalArgumentException("Invalid last purchase year format: " + lastPurchaseYear);
+        int year = Integer.parseInt(lastPurchaseYear);
+        int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        if (year < 1900 || year > currentYear) throw new IllegalArgumentException("Invalid last purchase year: " + lastPurchaseYear);
     }
     }
