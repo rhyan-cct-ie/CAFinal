@@ -17,17 +17,18 @@ public class Customer {
     private int customerClass;
     private String lastPurchaseYear;
     
-    public Customer (String firstName, String secondName, double purchaseValue, int customerClass, String lastPurchaseYear){
-        
-        // Constructor that uses setters for validation
-        setFirstName(firstName);
-        setSecondName(secondName);
-        setPurchaseValue(purchaseValue);
-        setCustomerClass(customerClass);
-        setLastPurchaseYear(lastPurchaseYear);
-}
+    //Constructors
+    public Customer(String fullName, double purchaseValue, int customerClass, String lastPurchaseYear) {
+        String[] nameParts = fullName.split(" ", 2);
+        this.firstName = nameParts[0];
+        this.secondName = nameParts.length > 1 ? nameParts[1] : "";
+        this.purchaseValue = purchaseValue;
+        this.customerClass = customerClass;
+        this.lastPurchaseYear = lastPurchaseYear;
+    }
+    
     //setters
-    private void setFirstName(String firstName) {
+   /* private void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -46,7 +47,7 @@ public class Customer {
 
     private void setLastPurchaseYear(String lastPurchaseYear) {
         this.lastPurchaseYear = lastPurchaseYear;
-    }
+    }*/
     
         
     // The getter methods allow access to the current values of the fields.

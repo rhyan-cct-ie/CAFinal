@@ -23,7 +23,11 @@ public class CustomerDiscountGenerator {// The name of the Program
     public static void main(String[] args) {
         ArrayList<Customer> customers = new ArrayList<>();
         String customerFile = "C:\\Users\\reg05\\CCT\\customers.txt";//The file path where the program reads from.
-        String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount.txt";//The file path where the programs writ to.
+        String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount;" //The file path where the programs writ to.
+                
+        public static void main(String[] args) {
+        ArrayList<Customer> customers = CustomerUtils.readCustomers(customerFile);
+        CustomerUtils.writeDiscountedCustomers(customers, outputCustomerFile);
         
         // Validate that the file exists, is readable, or not found
         File outputFile = new File(outputCustomerFile);
