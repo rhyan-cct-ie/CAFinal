@@ -7,13 +7,8 @@
  *
  * @author reg05
  */
-import java.io.BufferedReader;//Imports BufferedReader class to read the file efficiently or faster
-import java.io.FileReader;//Handles the basic charecter-reading on my txt file
-import java.io.IOException;//This is to help error-handling in the program as many issues can arise from reading and writing to a file
+import java.io.*;
 import java.util.ArrayList;//This allows to dynamically store and manage a list of objects
-import java.io.BufferedWriter;// Imports BufferedWrited for writing text to a character-output stream more efficiently; improves performance.
-import java.io.File;//Used in File validation 
-import java.io.FileWriter;//FileWriter is used to write character data to a file; opens the file for writing.
 
 public class CustomerDiscountGenerator {// The name of the Program
 
