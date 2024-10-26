@@ -1,6 +1,8 @@
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,7 +18,9 @@ import java.util.ArrayList;
 public class CustomerUtils {
     public static ArrayList<Customer> readCustomers(String customerFile) {
         ArrayList<Customer> customers = new ArrayList<>();//Create a list to hold customer objects
-        try (BufferedReader br = new BufferedReader(new FileReader(customerFile))) {//open the file
+        
+        //File reader
+        try (BufferedReader br = new BufferedReader(new FileReader(customerFile))) {
             String fullName;// variable to store customer full name
             while ((fullName = br.readLine()) != null) {//Read each line until the end of the file
                 fullName = fullName.trim();//remove leading and trailing whitspaces
@@ -62,4 +66,21 @@ public class CustomerUtils {
         int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
         if (year < 1900 || year > currentYear) throw new IllegalArgumentException("Invalid last purchase year: " + lastPurchaseYear);
     }
+        //File writer
+        public static void writeDiscountedCustomers(ArrayList<Customer> customers, String outputCustomerFile) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputCustomerFile))) {
+            for (Customer customer : customers) {
+                DiscountCalculator calculator = new DiscountCalculator(customer);
+                double finalValue = calculator.calculateDiscountedValue();
+                bw.write(customer.getFirstName() + " " + customer.getSecondName());
+                bw.newLine();
+                bw.write(String.valueOf(finalValue));
+                bw.newLine();
+            }
+            System.out.println("List of Customer Discounts written to " + outputCustomerFile);
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
+    }
+            
     }
