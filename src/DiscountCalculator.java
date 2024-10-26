@@ -7,7 +7,7 @@
  *
  * @author reg05
  */
-import java.util.Calendar;
+
 public class DiscountCalculator {
     private final Customer customer;// Holds the Customer object for which the discount will be calculated
     
