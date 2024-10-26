@@ -26,45 +26,25 @@ public class Customer {
         setCustomerClass(customerClass);
         setLastPurchaseYear(lastPurchaseYear);
 }
-    //validating the data
+    //setters
     private void setFirstName(String firstName) {
-        if (!firstName.matches("[a-zA-Z]+")) {
-            throw new IllegalArgumentException("Invalid first name: " + firstName);
-        }
         this.firstName = firstName;
     }
 
     private void setSecondName(String secondName) {
-        if (!secondName.matches("[a-zA-Z0-9]+")) {
-            throw new IllegalArgumentException("Invalid second name: " + secondName);
-        }
         this.secondName = secondName;
     }
 
     private void setPurchaseValue(double purchaseValue) {
-        if (purchaseValue < 0) {
-            throw new IllegalArgumentException("Invalid purchase value: " + purchaseValue);
-        }
         this.purchaseValue = purchaseValue;
     }
     
 
     private void setCustomerClass(int customerClass) {
-        if (customerClass < 1 || customerClass > 3) {
-            throw new IllegalArgumentException("Invalid customer class: " + customerClass);
-        }
         this.customerClass = customerClass;
     }
 
     private void setLastPurchaseYear(String lastPurchaseYear) {
-        if (!lastPurchaseYear.matches("\\d{4}")) {
-            throw new IllegalArgumentException("Invalid last purchase year format: " + lastPurchaseYear);
-        }
-        int year = Integer.parseInt(lastPurchaseYear);
-        int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-        if (year < 1900 || year > currentYear) {
-            throw new IllegalArgumentException("Invalid last purchase year: " + lastPurchaseYear);
-        }
         this.lastPurchaseYear = lastPurchaseYear;
     }
     
@@ -90,7 +70,7 @@ public class Customer {
         return lastPurchaseYear;
     }
 
-    @Override
+    @Override //This method overrides the default toString() from Object class
     public String toString() {
         return "Customer[firstName='" + firstName + "', secondName='" + secondName + 
                "', purchaseValue=" + purchaseValue + ", customerClass=" + customerClass + 

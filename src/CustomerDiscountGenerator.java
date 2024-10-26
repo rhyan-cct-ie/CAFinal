@@ -8,7 +8,7 @@
  * @author reg05
  */
 import java.io.BufferedReader;//Imports BufferedReader class to read the file efficiently or faster
-import java.io.FileReader;//handle the basic charecter-reading on my txt file
+import java.io.FileReader;//Handles the basic charecter-reading on my txt file
 import java.io.IOException;//This is to help error-handling in the program as many issues can arise from reading and writing to a file
 import java.util.ArrayList;//This allows to dynamically store and manage a list of objects
 import java.io.BufferedWriter;// Imports BufferedWrited for writing text to a character-output stream more efficiently; improves performance.
@@ -22,14 +22,11 @@ public class CustomerDiscountGenerator {// The name of the Program
      */
     public static void main(String[] args) {
         ArrayList<Customer> customers = new ArrayList<>();
-        String customerFile = "C:\\Users\\reg05\\Downloads\\TESTcustomerfile.txt";//The file path where the program reads from.
+        String customerFile = "C:\\Users\\reg05\\CCT\\customers.txt";//The file path where the program reads from.
         
         String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount.txt";//The file path where the programs writ to.
         
-        try (BufferedReader br = new BufferedReader(new FileReader(customerFile))) {
-            /*/Opens the customer file for reading using BufferedReader, 
-             which wraps around FileReader for efficient reading. The file is automatically 
-             closed when this block is exited.*/
+        try (BufferedReader br = new BufferedReader(new FileReader(customerFile))) {//a new instance of BufferedReader is created and assigned to the variable br.
             
             String line;//Variable to hold each line read from txt file
             while ((line = br.readLine()) != null) {//While loop reads lines from the file until there are no more lines.
@@ -54,7 +51,7 @@ public class CustomerDiscountGenerator {// The name of the Program
                     
                     line = br.readLine(); // Read the third line which is the customer class
                     while (line != null && line.trim().isEmpty()){//skip the empty lines
-                        line = br.readLine(); //skip empty line
+                        line = br.readLine();
                     }
                     int customerClass = Integer.parseInt(line.trim());//parse this line as an integer
                     System.out.println(customerClass);
