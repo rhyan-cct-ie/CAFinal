@@ -11,24 +11,24 @@ import java.util.Calendar;
 
 public class Customer {
     //Declare class fields as private to enforce encapsulation.
-    private String firstName;
-    private String secondName;
-    private double purchaseValue;
-    private int customerClass;
-    private String lastPurchaseYear;
+    private String firstName;//Customer's first name
+    private String secondName;//Customer's second name
+    private double purchaseValue;//Total Value of purchases made
+    private int customerClass;//Classification of customer (1-3)
+    private String lastPurchaseYear;//Year of the last purchase as a STRING
     
-    //Constructors
+    //Constructor to initialise customer attributes
     public Customer(String fullName, double purchaseValue, int customerClass, String lastPurchaseYear) {
-        String[] nameParts = fullName.split(" ", 2);
-        this.firstName = nameParts[0];
-        this.secondName = nameParts.length > 1 ? nameParts[1] : "";
-        this.purchaseValue = purchaseValue;
-        this.customerClass = customerClass;
-        this.lastPurchaseYear = lastPurchaseYear;
+        String[] nameParts = fullName.split(" ", 2);//Split full name into first name and second name
+        this.firstName = nameParts[0];//Assign first name
+        this.secondName = nameParts.length > 1 ? nameParts[1] : "";//Assign second name
+        this.purchaseValue = purchaseValue;//Set the purchase value
+        this.customerClass = customerClass;//Set the customer class
+        this.lastPurchaseYear = lastPurchaseYear;//Set the last purchase year
     }
     
-    //setters
-   /* private void setFirstName(String firstName) {
+    //setters are not use in this program
+   private void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -47,11 +47,11 @@ public class Customer {
 
     private void setLastPurchaseYear(String lastPurchaseYear) {
         this.lastPurchaseYear = lastPurchaseYear;
-    }Setters are not used in the 
-    */
+    } //Setters are not used in the program
+   
     
         
-    // The getter methods allow access to the current values of the fields.
+    //Getter methods allow access private attributes
     public String getFirstName() {
         return firstName;
     }
@@ -72,11 +72,11 @@ public class Customer {
         return lastPurchaseYear;
     }
 
-    @Override //This method overrides the default toString() from Object class
+    @Override //Override toString for easier printing of customer details.
     public String toString() {
-        return "Customer[firstName='" + firstName + "', secondName='" + secondName + 
-               "', purchaseValue=" + purchaseValue + ", customerClass=" + customerClass + 
-               ", lastPurchaseYear='" + lastPurchaseYear + "']";
+        return "Customer First Name='" + firstName + "', Second Name='" + secondName + 
+               "', Purchase Value=" + purchaseValue + ", Class=" + customerClass + 
+               ", Last Purchase Year='" + lastPurchaseYear + "']";
     }
     
 }

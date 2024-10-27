@@ -22,7 +22,7 @@ public class DiscountCalculator {
         double purchaseValue = customer.getPurchaseValue();//get the original purchase value
         int customerClass = customer.getCustomerClass();//get the customer class
         String lastPurchaseYearStr = customer.getLastPurchaseYear();//get the last purchase as a string
-        int lastPurchaseYear = Integer.parseInt(lastPurchaseYearStr);//convert last purchase year as an integer
+        int lastPurchaseYear = Integer.parseInt(lastPurchaseYearStr);//convert last purchase year FROM string to an INTEGER
         int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);//get the current year
         
     double discountPercentage = 0;//This initializes the discountPercentage variable to 0, indicating no discount by default.
