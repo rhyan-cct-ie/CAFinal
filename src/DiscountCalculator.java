@@ -27,8 +27,8 @@ public class DiscountCalculator {
         
     double discountPercentage = 0;//This initializes the discountPercentage variable to 0, indicating no discount by default.
     
-        switch (customerClass) {
-            case 1 -> {
+        switch (customerClass) {//Use switch for better flow, better readability and maintenance
+            case 1 -> {//if customer class is 1
                 if (lastPurchaseYear == currentYear) {
                     discountPercentage = 0.30;//30% discount if last purchase is in the current year (2024)
                 } else if (lastPurchaseYear < currentYear) {
@@ -37,7 +37,7 @@ public class DiscountCalculator {
                     discountPercentage = 0.10;// 10% discount if last purchase was more than 5 years ago
                 }
             }
-            case 2 -> {
+            case 2 -> {//if customer class is 2
                 if (lastPurchaseYear == currentYear) {
                     discountPercentage = 0.15;// 15% discount if last purchase is in the current year
                 } else if (lastPurchaseYear < currentYear) {
@@ -46,13 +46,13 @@ public class DiscountCalculator {
                     discountPercentage = 0.05;// 5% discount if last purchase was more than 5 years ago
                 }
             }
-            case 3 -> {
+            case 3 -> {//if customer class is 3
                 if (lastPurchaseYear == currentYear) {
                     discountPercentage = 0.03;// 3% discount if last purchase is in the current year
                 }
                 // No discount for Class 3 if the last purchase was before the current year
             }
-            default -> {
+            default -> {//This is the default case, which will execute if customerClass does not match any of the specified cases (1, 2, or 3)
             }
         }
 
