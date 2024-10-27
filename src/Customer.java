@@ -47,7 +47,8 @@ public class Customer {
 
     private void setLastPurchaseYear(String lastPurchaseYear) {
         this.lastPurchaseYear = lastPurchaseYear;
-    }*/
+    }Setters are not used in the 
+    */
     
         
     // The getter methods allow access to the current values of the fields.

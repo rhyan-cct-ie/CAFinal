@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 
+//GITHUB LINK HERE: https://github.com/rhyan-cct-ie/CAFinal.git
+
 /**
  *
  * @author reg05
@@ -17,10 +19,8 @@ public class CustomerDiscountGenerator {// The name of the Program
     private static String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount.txt";
                 
         public static void main(String[] args) {
-        ArrayList<Customer> customers = CustomerUtils.readCustomers(inputCustomerFile);
-        CustomerUtils.writeDiscountedCustomers(customers, outputCustomerFile);
-        
-        //Validate that the input file exists#
+            
+        //Validate that the input file exists, is readable or not found.
         File inputFile = new File (inputCustomerFile);
         if (inputFile.exists()){
             System.out.println("Input File exists" + inputFile.getAbsolutePath());
@@ -32,17 +32,24 @@ public class CustomerDiscountGenerator {// The name of the Program
         }else{
             System.out.println("Input File is NOT Readable");
         }
-        // Validate that the outout file exists, is readable, or not found
+        
+        //Proceed with reading and writing txt files
+        ArrayList<Customer> customers = CustomerUtils.readCustomers(inputCustomerFile);
+        CustomerUtils.writeDiscountedCustomers(customers, outputCustomerFile);
+        
+        // Validate that the outout file exists, is readable, or not found.
         File outputFile = new File(outputCustomerFile);
         if (outputFile.exists()) {
             System.out.println("Output File exists: " + outputFile.getAbsolutePath());
-            if (outputFile.canRead()) {
-                System.out.println("Output File is readable.");
-            } else {
-                System.out.println("Output File is NOT readable.");
-            }
         } else {
+        
             System.out.println("Output File NOT found: " + outputFile.getAbsolutePath());
+        }
+        if (outputFile.canRead()){
+            System.out.println("Output File is readable");
+        }else{
+            System.out.println("Output File is NOT readable");
+        
         }
     }
     

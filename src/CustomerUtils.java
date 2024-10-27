@@ -47,7 +47,7 @@ public class CustomerUtils {
         }
         return customers;//Return the list of cutomers
     }
-        //parseNextLine method
+        //parseNextValue method
         private static double parseNextValue(BufferedReader br) throws IOException {
         String line;
         while ((line = br.readLine()) != null && line.trim().isEmpty());
