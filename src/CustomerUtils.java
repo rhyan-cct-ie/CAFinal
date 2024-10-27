@@ -92,7 +92,7 @@ public class CustomerUtils {
         
         //Validate customer class: it must be an integer between 1 and 3, if outside range, an error is thrown. No discount is applied.
         if (customerClass < 1 || customerClass > 3) 
-            throw new IllegalArgumentException("Invalid customer class: " + customerClass + "No Discount");
+            throw new IllegalArgumentException("Invalid customer class: " + customerClass + " - No Discount");
         
         //Validate last purchase year format: year must be a four-digit number and within realistic range.
         //It cannot be less than 1900 or greater than the current year.
