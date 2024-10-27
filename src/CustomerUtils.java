@@ -24,10 +24,14 @@ public class CustomerUtils {
         //File reader
         //Try-with-resources for automatic resource management
         try (BufferedReader br = new BufferedReader(new FileReader(customerFile))) {
-            String fullName;// variable to store customer full name
-            while ((fullName = br.readLine()) != null) {//Read each line until the end of the file
-                fullName = fullName.trim();//remove leading and trailing whitspaces
-                if (fullName.isEmpty()) continue;//skip empty lines
+            String line;// variable to store customer full name
+            while ((line = br.readLine()) != null) {//Read each line until the end of the file
+                line = line.trim();//remove leading and trailing whitspaces
+                if (line.isEmpty()) 
+                    continue;//skip empty lines
+                
+                //Read full name
+                String fullName=line;
                 try {
                     //Read and parse customer details
                     double purchaseValue = parseNextValue(br);//parse to double
@@ -57,53 +61,60 @@ public class CustomerUtils {
         if (line == null) throw new IOException("Unexpected end of file");
         return Double.parseDouble(line.trim());
     }
-        //Validation of customer data
+        //Validation of customer data. In the validation logic, I use regex patterns as it is concise, flexible, and straighforward.
+        //Regex also optimises engine performance and reduce human errors.
         private static void validateCustomer(String fullName, double purchaseValue, int customerClass, String lastPurchaseYear) {
-        String[] nameParts = fullName.split(" ", 2);
+        String[] nameParts = fullName.split(" ", 2);//First name and second name are separated by a single space
         
-        //Validate first name
+        //Validate first name: first name must consist ONLY of letters (a-z, A-Z),otherwise an error is thrown.
         if (!nameParts[0].matches("[a-zA-Z]+")) 
             throw new IllegalArgumentException("Invalid first name: " + nameParts[0]+ "'Only letters are allowed.");
         
-        //Validate second name if exists
+        //Validate second name if exists: consists of either letters and/or numbers,otherwise, an error is thrown.
         if (nameParts.length > 1 && !nameParts[1].matches("[a-zA-Z0-9]+")) 
             throw new IllegalArgumentException("Invalid second name: " + nameParts[1]+ "'Only letters and numbers are allowed.");
         
-        //Validate purchase value
-        //Any double is accepted
-        //if (purchaseValue < 0) 
-           // throw new IllegalArgumentException("Invalid purchase value: " + purchaseValue);
+        //Validate purchase value: it must be a double,if does not match, an error is thrown.
+        if (purchaseValue < 0) 
+           throw new IllegalArgumentException("Invalid purchase value: " + purchaseValue);
         
-        //Validate customer class
+        //Validate customer class: it must be an integer between 1 and 3, if outside range, an error is thrown. No discount is applied.
         if (customerClass < 1 || customerClass > 3) 
-            throw new IllegalArgumentException("Invalid customer class: " + customerClass);
+            throw new IllegalArgumentException("Invalid customer class: " + customerClass + "No Discount");
         
-        //Validate last purchase year format
+        //Validate last purchase year format: year must be a four-digit number and within realistic range.
+        //It cannot be less than 1900 or greater than the current year.
         if (!lastPurchaseYear.matches("\\d{4}")) 
             throw new IllegalArgumentException("Invalid last purchase year format: " + lastPurchaseYear);
-       
         int year = Integer.parseInt(lastPurchaseYear);//Convert last purchase year to INTEGER
         int currentYear;//Assigsn currentYear variable as integer
         currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);//getting current year
-        
-        //This conditional checks if the parsed year is less htan 1900 or greated than curren year
+       
+        //This conditional checks if the parsed year is less htan 1900 or greated than current year
         //If this is true, the data in invalid for processing
         if (year < 1900 || year > currentYear) throw new IllegalArgumentException("Invalid last purchase year: " + lastPurchaseYear);
     }
-        //File writer
+        //File writer method to write discounted customer data to a specified output file
         public static void writeDiscountedCustomers(ArrayList<Customer> customers, String outputCustomerFile) {
+            
+        // Try-with-resources to ensure proper resource management
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputCustomerFile))) {
+            //Iterate through each customer in the list
             for (Customer customer : customers) {
-                DiscountCalculator calculator = new DiscountCalculator(customer);
-                double finalValue = calculator.calculateDiscountedValue();
-                bw.write(customer.getFirstName() + " " + customer.getSecondName());
-                bw.newLine();
-                bw.write(String.valueOf(finalValue));
-                bw.newLine();
+                try{//try-catch to handle errors during calculation
+                DiscountCalculator calculator = new DiscountCalculator(customer);//Create a DiscountCalculator Object
+                double finalValue = calculator.calculateDiscountedValue();//Calculate the discounted value (finalValue) using the calculator
+                bw.write(customer.getFirstName() + " " + customer.getSecondName());//Write customer's full name to output file
+                bw.newLine();//Move to next line
+                bw.write(String.valueOf(finalValue));// Write the final discounted value to the output file
+                bw.newLine();//move to next line
+                } catch (Exception e) {
+                    System.out.println("Error calculating discount for customer: " + customer.getFirstName() + " - " + e.getMessage());
+                }
             }
-            System.out.println("List of Customer Discounts written to " + outputCustomerFile);
-        } catch (IOException e) {
-            System.out.println("Error writing to file: " + e.getMessage());
+            System.out.println("List of Customer Discounts written to " + outputCustomerFile);// Print a success message indicating that the data has been written to the file.
+        } catch (IOException e) {// Handle any IO exceptions that occur during file writing
+            System.out.println("Error writing to file: " + e.getMessage());//Error message if file writer unsuccessful
             }
         }
             

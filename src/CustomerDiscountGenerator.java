@@ -15,7 +15,7 @@ import java.util.ArrayList;//This allows to dynamically store and manage a list 
 public class CustomerDiscountGenerator {// The name of the Program
     
     //File paths for reading and writing the file
-    private static String inputCustomerFile = "C:\\Users\\reg05\\CCT\\customers.txt";//File path where customer txt is located.
+    private static String inputCustomerFile = "C:\\Users\\reg05\\Downloads\\TESTcustomerfile.txt";//File path where customer txt is located.
     private static String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount.txt";//File Path where customersdiscount is written to.
          
     
