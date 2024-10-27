@@ -1,10 +1,10 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 
 //GITHUB LINK HERE: https://github.com/rhyan-cct-ie/CAFinal.git
-
 /**
  *
  * @author reg05
@@ -15,15 +15,15 @@ import java.util.ArrayList;//This allows to dynamically store and manage a list 
 public class CustomerDiscountGenerator {// The name of the Program
     
     //File paths for reading and writing the file
-    private static String inputCustomerFile = "C:\\Users\\reg05\\Downloads\\TESTcustomerfile.txt";//File path where customer txt is located.
-    private static String outputCustomerFile = "C:\\Users\\reg05\\CCT\\customersdiscount.txt";//File Path where customersdiscount is written to.
+    private static String inputCustomerFile = "resources/customers.txt";//File path where customer txt file is located. Change this to your directory.
+    private static String outputCustomerFile = "output/customersdiscount.txt";//File Path where customersdiscount is written to. Change to your directory.
          
     
     //Main method-entry point of the program
         public static void main(String[] args) {
             
         //Validate that the input file exists, is readable or not found.
-        File inputFile = new File (inputCustomerFile);//Create a File object for the inputFile. File is from java.io library
+        File inputFile = new File (inputCustomerFile);//Create a File object for the inputFile.
         
         /*File Validation prior to reading the file ensures that it can safely attempt to 
         read from the specified file before performing any operations*/
