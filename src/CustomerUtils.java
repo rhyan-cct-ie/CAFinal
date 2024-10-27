@@ -24,19 +24,22 @@ public class CustomerUtils {
         //File reader
         //Try-with-resources for automatic resource management
         try (BufferedReader br = new BufferedReader(new FileReader(customerFile))) {
-            String line;// variable to store customer full name
-            while ((line = br.readLine()) != null) {//Read each line until the end of the file
-                line = line.trim();//remove leading and trailing whitspaces
-                if (line.isEmpty()) 
+            String fullName;// variable to store customer full name
+            while ((fullName = br.readLine()) != null) {//Read each line until the end of the file
+                fullName = fullName.trim();//remove leading and trailing whitspaces
+                if (fullName.isEmpty()) 
                     continue;//skip empty lines
-                
-                //Read full name
-                String fullName=line;
                 try {
-                    //Read and parse customer details
-                    double purchaseValue = parseNextValue(br);//parse to double
-                    int customerClass = (int) parseNextValue(br);//parse to integer
-                    String lastPurchaseYear = br.readLine().trim();//read the last purchase year
+                
+                //Read purchase value: this line parses a double from the next non-empty line
+                double purchaseValue = Double.parseDouble(readNextNonEmptyLine(br));
+
+                // Read customer class: this line parses an integer from the next non-empty line
+                int customerClass = Integer.parseInt(readNextNonEmptyLine(br));
+
+                
+                // Read last purchase year: this reads the non-empty line as a string
+                String lastPurchaseYear = readNextNonEmptyLine(br);
                     
                     //Validate customer details
                     validateCustomer(fullName, purchaseValue, customerClass, lastPurchaseYear);
@@ -54,6 +57,15 @@ public class CustomerUtils {
         }
         return customers;//Return the list of cutomers
     }
+        private static String readNextNonEmptyLine(BufferedReader br) throws IOException {//new method to iterates through each line, skips empty line
+            String line;
+            while ((line = br.readLine()) != null) { // Read each line from the file
+                line = line.trim();                  // Remove any leading/trailing whitespace
+            if (!line.isEmpty()) return line;    // Return the line if it's non-empty
+            }
+            throw new IOException("Unexpected end of file"); // Throw an error if the end of the file is reached
+        }
+        
         //parseNextValue method
         private static double parseNextValue(BufferedReader br) throws IOException {
         String line;
@@ -90,7 +102,7 @@ public class CustomerUtils {
         int currentYear;//Assigsn currentYear variable as integer
         currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);//getting current year
        
-        //This conditional checks if the parsed year is less htan 1900 or greated than current year
+        //This conditional checks if the parsed year is less htan 1900 or greater than current year
         //If this is true, the data in invalid for processing
         if (year < 1900 || year > currentYear) throw new IllegalArgumentException("Invalid last purchase year: " + lastPurchaseYear);
     }

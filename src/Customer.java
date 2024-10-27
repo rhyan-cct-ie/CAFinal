@@ -27,7 +27,7 @@ public class Customer {
         this.lastPurchaseYear = lastPurchaseYear;//Set the last purchase year
     }
     
-    //setters are not use in this program
+    //setters are not used in this program; can be deleted
    private void setFirstName(String firstName) {
         this.firstName = firstName;
     }
