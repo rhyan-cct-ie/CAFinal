@@ -16,7 +16,7 @@ public class CustomerDiscountGenerator {// The name of the Program
     
     //File paths for reading and writing the file
     private static String inputCustomerFile = "resources/customers.txt";//File path where customer txt file is located. Change this to your directory.
-    private static String outputCustomerFile = "output/customersdiscount.txt";//File Path where customersdiscount is written to. Change to your directory.
+    private static String outputCustomerFile = "output/customerdiscount.txt";//File Path where customersdiscount is written to. Change to your directory.
          
     
     //Main method-entry point of the program
